@@ -37,13 +37,14 @@ public class Vehiculo {
         }
         else{this.modelo=modelo;}
 
-        if (anio<1980 || anio>2021){
-            this.anio = 0;
+        if (anio>1980 && anio<2021){
+            this.anio=anio;
         }
-        else{this.anio=anio;}
+        else{this.anio = 0;}
+        if (numeroPuertas>0 &&  numeroPuertas<5){
+            this.numeroPuertas = numeroPuertas;
+        }else this.numeroPuertas = 1;
 
-        this.anio = anio;
-        this.numeroPuertas = numeroPuertas;
     }
 
     public List<Revision> getRevisiones() {
