@@ -21,20 +21,6 @@ public class Vehiculo {
     }
 
     public Vehiculo(String placa, String marca, String modelo, String color, int anio, int numeroPuertas) {
-        //marca, modelo, color, no vacio;
-        // anio>= 1980 && <=actual
-        //puertas >0
-        /*if (marca!=null && modelo!=null && color!=null){
-            this.marca = marca;
-            this.modelo = modelo;
-            this.color = color;
-        }
-        else{
-            this.marca ="NA";
-            this.modelo = "NA";
-            this.color = "NA";
-            System.out.println("los campos marca, modelo o color no pueden ser vacios");
-        }*/
         this.placa = placa;
         if (marca==null | "".equals(marca)){
             this.marca = "NA";

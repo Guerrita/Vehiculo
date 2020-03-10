@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Vector;
 
 public class main {
@@ -30,24 +31,32 @@ public class main {
                     JOptionPane.showMessageDialog(null, "Vehiculo registrado");
                     break;
                 case "2"://Registrar revision
-                    Vehiculo vehiculoRevision = null;
-                    String placaRevision = JOptionPane.showInputDialog("Ingrese la placa del vehiculo");
-                    for (Vehiculo vehiculo : vehiculos){
-                        if (placaRevision.equals(vehiculo.getPlaca())) {
-                            vehiculoRevision = vehiculo;
+                    String placaRevision = JOptionPane.showInputDialog("Ingrese la placa del vehículo revisado:");
+                    Optional<Vehiculo> vehiculoRevision= Optional.empty();
+                    for(Vehiculo vehiculo:vehiculos){
+                        if(placaRevision.equals(vehiculo.getPlaca())){
+                            vehiculoRevision = Optional.of(vehiculo);
                             break;
                         }
                     }
-                    if(vehiculoRevision==null){
-                        JOptionPane.showMessageDialog(null,"El vehiculo para la placa ingresada no existe");
+                    if(!vehiculoRevision.isPresent()){
+                        JOptionPane.showMessageDialog(null, "El vehículo con la placa ingresada no existe");
                     }else{
-                        String diagnostico = JOptionPane.showInputDialog("Ingrese el diagnostico");
-                        Revision revision = new Revision(LocalDateTime.now(),diagnostico);
-                        vehiculoRevision.getRevisiones().add(revision);
+                        String diagnostico = JOptionPane.showInputDialog("Ingrese el diagnóstico: ");
+                        Revision revision = new Revision(LocalDateTime.now(), diagnostico);
+                        Vehiculo vehiculo = vehiculoRevision.get();
+                        vehiculo.getRevisiones().add(revision);
+                        JOptionPane.showMessageDialog(null, "Revisión registrada correctamente");
                     }
                     break;
-                case "3":
-                    JOptionPane.showMessageDialog(null,"Hasta luego.");
+                case "3": //consultar vehículo
+                    String placaConsulta = JOptionPane.showInputDialog("Ingrese la placa del vehículo a consultar:");
+                    for(Vehiculo vehiculo:vehiculos){
+                        if(placaConsulta.equals(vehiculo.getPlaca())){
+                            System.out.println(vehiculo);
+                            break;
+                        }
+                    }
                     break;
                 default://Error
                     JOptionPane.showMessageDialog(null,"Opcion incorrecta.");
